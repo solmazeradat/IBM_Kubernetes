@@ -2,6 +2,7 @@
 Working through the IBM learning material to gain an understanding of kubernetes.
 
 video Link: https://www.crowdcast.io/e/operating-kubernetes?utm_source=crowdcast&utm_medium=email&utm_campaign=followers
+
 Presentation Link: **Presentation-1-operating-iks-essentials.pdf**
 
 # Lab 1
