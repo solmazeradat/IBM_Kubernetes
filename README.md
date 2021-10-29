@@ -99,3 +99,25 @@ kubectl scale --replicas=10 deployment guestbook
 ```
 
 ![image](https://user-images.githubusercontent.com/11243960/139424967-7d23bec2-5dd2-464f-a3a4-d5bc32de9bd3.png)
+
+Kubernetes will matvh the required replica numbers and start 9 new pods with the same configuration as the first. 
+
+## Step 2: viewing the changes 
+To see the changes being rolled out run:
+
+```
+kubectl rollout status deployment guestbook
+```
+![image](https://user-images.githubusercontent.com/11243960/139432279-b90ec0d3-5ef3-4d29-9207-7b9faa24b400.png)
+
+## Step 3: check pods are running
+Once the rollout has finished, ensure your pods are running:
+```
+kubectl get pods
+```
+![image](https://user-images.githubusercontent.com/11243960/139432680-a346c39d-4a30-425f-8696-988faa5e14de.png)
+
+Tip: Another way to improve availability is to use multizone clusters, spreadingyour application over multiple data centers in the same region, as shown in the following diagram:
+
+![image](https://user-images.githubusercontent.com/11243960/139433076-008e44fd-b679-4c13-b403-aa13f7623f55.png)
+
