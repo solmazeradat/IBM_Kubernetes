@@ -202,3 +202,17 @@ Before working on the application we need to clone a github repo:
 git clone https://github.com/IBM/guestbook.git
 ```
 
+The directory has multiple versions of the guestbook as well as the configuration files we'll use to deploy the pieces of the application. 
+
+```
+cd guestbook
+cd v1
+```
+
+# Scale apps natively
+
+Kubernetes can deploy an individual pod to run an application, but when you need to scale it to handle a large number of requests, a ```Deployment``` is the resource you want to use. 
+
+- A Deployment manages a collection of similar pods. When you ask for a specific number of replicas the **Kubernetes Deployment Controller** will attempt to maintain that number of replicas at all times.
+
+- Every Kubernetes object we create contains two nested object fields that govern the object’s configuration: the field ```spec``` and the field ```status```.
