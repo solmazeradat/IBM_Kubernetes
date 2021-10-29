@@ -80,7 +80,7 @@ Now that you have both the address and the port, you can access the application 
 ![image](https://user-images.githubusercontent.com/11243960/139424746-48ec0181-af67-4d62-8376-02dd15579f20.png)
 
 
-# Exercise 2: Using REplicas, Updates and rollback apps
+# Exercise 2: Using Replicas, Updates and rollback apps
 
 This part will cover how to update the number of instances a deployment has and how to safely rollout an update of your application on kubernetes.
 
@@ -121,3 +121,71 @@ Tip: Another way to improve availability is to use multizone clusters, spreading
 
 ![image](https://user-images.githubusercontent.com/11243960/139433076-008e44fd-b679-4c13-b403-aa13f7623f55.png)
 
+# Update and Roll Back Apps 
+
+- Kubernetes allows you to do a rolling upgrade of your application to a new container image.
+- With this, you can easily update the running image and also easily undo a rollout (roll back) if aproblem is discovered during or after deployment.
+
+### Step 1: Update 
+In the previus lab, am image with the tag v1 was used. For the update, we'll use the image with the tag v2. Run the following:
+```
+kubectl set image deployment/guestbook guestbook=ibmcom/guestbook:v2
+```
+![image](https://user-images.githubusercontent.com/11243960/139434621-6d7224be-9556-49bc-aed3-9fcf24da82c0.png)
+
+Note: a pod could have multiple containers, each with its own name. Each image can be changed individually or all at once by referring to the name. In the case of our ```guestbook``` Deployment, the container name is also ```guestbook```.
+
+## Step 2: checking rollout status
+To check the status of therollout run:
+```
+kubectl rollout status deployment/guestbook
+```
+![image](https://user-images.githubusercontent.com/11243960/139441867-f90b27f8-569d-44a0-ba91-54a1308d99ea.png)
+
+## Step 3: Load the applicaiton
+
+Accessing ```<public-IP>:<nodeport>``` in the browser to confirm your new code is active. To verify that you're running "v2" of guestbook, look at the title of the page, it should now be Guestbook - v2. You may need to do a"cache-less" reload of the web-page to refresh the cache -- ```Ctrl+Shift+R``` (on Windows) or ```Cmd+Shift+R``` (on Mac).
+
+![image](https://user-images.githubusercontent.com/11243960/139442372-6ca00b15-f414-45c7-afaf-081683f221fa.png)
+
+Note: to get your IP addresss and port can type the following: 
+```
+kubectl get svc
+ibmcloud ks workers --clusters mycluster-free
+```
+
+## Step 4: Undo a rollout
+
+```
+kubectl rollout undo deployment guestbook 
+```
+To check the status of the rollback run:
+```
+kubectl rollout status deployment/guestbook
+```
+![image](https://user-images.githubusercontent.com/11243960/139443938-76ad94de-b349-44f5-87bd-b662a03f1e4e.png)
+
+## Step 5: Old and new replicas 
+
+When doing a rollout, you see references to old replicas and new replicas.
+- The **old** replicas are the original 10 pods deployed when we scaled the application.
+- The **new** replicas come from the newly created pods with the different image.
+
+All of these pods are owned by the deployment. The deployment manages these two sets of pods with a resource called a ```ReplicaSet```.
+```
+kubectl get replicaset
+```
+![image](https://user-images.githubusercontent.com/11243960/139444943-cecad713-acd5-46f9-83c6-2912a4eb0edd.png)
+
+## Step 6: Removing services
+Before we continue, let's delete the application so we can learn about a different way toachieve the same results. 
+
+Remove ```deployment```: 
+```
+kubectl delete deployment guestbook
+```
+
+Remove ```service```:
+```
+kubectl delete service guestbook
+```
