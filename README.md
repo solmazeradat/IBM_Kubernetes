@@ -197,7 +197,7 @@ Remove ```service```:
 kubectl delete service guestbook
 ```
 
-#<a name="Using-Configuration-files"></a>Exercise 3: Using Configuration files 
+# <a name="Using-Configuration-files"></a>Exercise 3: Using Configuration files 
 
 In this exercise we will learn how to deploy the same guestbook application we deployed in the previous labs, however, instead of using ```kubectl``` command line helper functions we'll be deploying the application using confuguation files. 
 
