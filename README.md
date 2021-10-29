@@ -189,3 +189,10 @@ Remove ```service```:
 ```
 kubectl delete service guestbook
 ```
+
+# Exercise 3: Using Configuration files 
+
+In this exercise we will learn how to deploy the same guestbook application we deployed in the previous labs, however, instead of using ```kubecyl``` command line helper functions we'll be deploying the application using confuguation files. 
+
+The configuation file mechanism allows you to have a more fine-grained control over all of resources being created within the Kubernetes clusters. 
+
