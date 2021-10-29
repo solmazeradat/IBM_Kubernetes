@@ -54,3 +54,27 @@ This created a new resource in Kubernetes -- a service.
 ---
 A service and deployment are two essential building blocks for creating an application and accessing it.
 ---
+
+## Step 3 Find the port used on worker nodes
+
+To find the port used in that worker node, examine your new service:
+
+```
+kubectl get service questbook
+```
+
+In column PORT(S), you can see that internal port 3000 is mapped to the external port <number greater than 30000>. The <nodeport> is always in the 30000 range, it is automatically created, and will be different in your case. Remember this commmand, you will need it later in order to find out ports of your other services.
+  
+## Step 4 Accessing the service
+
+guestbook is now running on your cluster, and exposed to the internet. We need tofind out where it is accessible. The worker nodes running in the container service get external IP addresses. Run the following command and replace <your-cluster> with the name of your IKS cluster, for example mycluster-free
+
+```  
+ibmcloud ks workers --cluster <your-cluster>
+```
+Note the public IP listed in the <public-IP> column. 
+  
+## Spep 5 Accessing the applicaiton
+
+Now that you have both the address and the port, you can access the application inthe web browser at <public-IP>:<nodeport>. You have deployed an application to kubernetes.
+ 
