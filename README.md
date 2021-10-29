@@ -73,7 +73,29 @@ ibmcloud ks workers --cluster <your-cluster>
 ```
 Note the public IP listed in the ```<public-IP>``` column. 
   
-## Step 5 Accessing the applicaiton
+## Step 5 Accessing the application
 
 Now that you have both the address and the port, you can access the application inthe web browser at ```<public-IP>:<nodeport>```. You have deployed an application to kubernetes.
- 
+
+![image](https://user-images.githubusercontent.com/11243960/139424746-48ec0181-af67-4d62-8376-02dd15579f20.png)
+
+
+# Exercise 2: Using REplicas, Updates and rollback apps
+
+This part will cover how to update the number of instances a deployment has and how to safely rollout an update of your application on kubernetes.
+
+# Scale apps and Replicas
+
+- A *replica* is a copy of a pod that contains a running service. 
+- By having multiple replicas of a pod, you can ensure your deployment has the available resources to handle increasing loadon your application. 
+- Multiple replicase also increase availability of your app.
+
+## Step 1: Creating replicas of a pad
+
+```kubectl``` provides a ```scale``` subcommand to change the size of an existingdeployment. Let's increase our capacity from a single running instance of guestbook up to10 instances:
+
+```
+kubectl scale --replicas=10 deployment guestbook
+```
+
+![image](https://user-images.githubusercontent.com/11243960/139424967-7d23bec2-5dd2-464f-a3a4-d5bc32de9bd3.png)
