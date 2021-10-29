@@ -19,7 +19,14 @@ Follow the instuction in the file **Lab-2-iks-essentials.pdf**. The lab objectiv
 - Add AI services to extend your app
 - Secure and monitor your cluster and app
 
-# Exercise 1: Deploy container image 
+# Table of contents
+1. [Exercise 1: Deploy container image](#Deploy-container-image)
+2. [Exercise 2: Using Replicas, Updates and rollback apps](#Using-Replicas-Updates-and-rollback-apps)
+3. [Exercise 3: Using Configuration files](#Using-Configuration-files)
+
+
+
+# <a name="Deploy-container-image"></a>Exercise 1: Deploy container image 
 
 - A container image for this app is already built and uploaded to DockerHub under the name ibmcom/guestbook:v1.
 - When deploying this app, we will be using Kubernetes artifacts such as **deployments**, **pods** and **services**. 
@@ -80,7 +87,7 @@ Now that you have both the address and the port, you can access the application 
 ![image](https://user-images.githubusercontent.com/11243960/139424746-48ec0181-af67-4d62-8376-02dd15579f20.png)
 
 
-# Exercise 2: Using Replicas, Updates and rollback apps
+# <a name="Using-Replicas-Updates-and-rollback-apps"></a>Exercise 2: Using Replicas, Updates and rollback apps
 
 This part will cover how to update the number of instances a deployment has and how to safely rollout an update of your application on kubernetes.
 
@@ -190,7 +197,7 @@ Remove ```service```:
 kubectl delete service guestbook
 ```
 
-# Exercise 3: Using Configuration files 
+#<a name="Using-Configuration-files"></a>Exercise 3: Using Configuration files 
 
 In this exercise we will learn how to deploy the same guestbook application we deployed in the previous labs, however, instead of using ```kubectl``` command line helper functions we'll be deploying the application using confuguation files. 
 
