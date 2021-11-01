@@ -262,3 +262,11 @@ spec:
           containerPort: 3000
 ```
 
+The configuation file above is used to create a deployment object named guestbook with a pod containing a single container runnng the image ```ibm/guestbook:v1```. It also specifies replias set to 3 so kubernetes always tries to maintain exactly three active pods at all times. 
+
+## Step 1: Create deployment 
+
+Create guestbook deployment:
+```
+kubectl create -f guestbook-deployment.yaml
+```
