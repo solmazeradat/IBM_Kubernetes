@@ -323,7 +323,7 @@ spec:
 Create guestbook service using the same type of commnad we used when we created the deployment. 
 
 ```
-kubectl create -f guestbook-service.ymal
+kubectl create -f guestbook-service.yaml
 ```
 ## Step 6: Connecting to app
 
