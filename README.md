@@ -340,5 +340,28 @@ To solve this we need to have all instances of our app share the same data store
 
 redis-master-deployment.yaml
 ```
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:  name: redis-master
+  labels:
+    app: redis
+    role: master
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+      role: master
+  template:
+    metadata:
+      labels:
+        app: redis
+        role: master
+    spec:
+      containers:
+      - name: redis-master
+        image: redis:3.2.9
+        ports:
+        - name: redis-server
+          containerPort: 6379
 ```
