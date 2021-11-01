@@ -223,3 +223,18 @@ Kubernetes can deploy an individual pod to run an application, but when you need
 - A Deployment manages a collection of similar pods. When you ask for a specific number of replicas the **Kubernetes Deployment Controller** will attempt to maintain that number of replicas at all times.
 
 - Every Kubernetes object we create contains two nested object fields that govern the object’s configuration: the field ```spec``` and the field ```status```.
+
+- Field ```spec``` defines the desired state of an object (what we want).
+- Filed ```status``` shows the current state (what is now).
+- Filed ```status``` is provided by the kubernetes system, we don't define it by ourselves. 
+- Kubernetes will attepmt to reconcile your desired state with the actual state of the system. 
+
+A configuation file for every object we create, must contain these four fields: 
+ - ```apiVersion```
+ - ```kind```
+ - ```metadata```
+ - ```spec```
+
+guestbook-deployment.yaml
+```
+
