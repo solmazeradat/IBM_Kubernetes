@@ -237,4 +237,28 @@ A configuation file for every object we create, must contain these four fields:
 
 guestbook-deployment.yaml
 ```
+piVersion: apps/v1
+kind: Deployment
+metadata:  name: guestbook-v1
+  labels:
+    app: guestbook
+    version: "1.0"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: guestbook
+  template:
+    metadata:
+      labels:
+        app: guestbook
+        version: "1.0"
+    spec:
+      containers:
+      - name: guestbook
+        image: ibmcom/guestbook:v1
+        ports:
+        - name: http-server
+          containerPort: 3000
+```
 
