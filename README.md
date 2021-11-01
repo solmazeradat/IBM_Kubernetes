@@ -365,3 +365,39 @@ spec:
         - name: redis-server
           containerPort: 6379
 ```
+
+- This yaml file will be used to created a redis databas in a deployment named ```redis-master```.
+- it will create a single instance, with replicas set to 1. 
+- The guestbook app instance will connect to it to persist data, as well as read the persisted data back. 
+- The image running in the container is 'redis:3.2.9'. This deployment will be available on the standard redis port 6379.
+
+## Step 1: Create redis deployment
+
+Create a redis deployment similar to what was done for guestbook
+
+```
+kubectl create -f redis-master-deployment.yaml
+```
+
+## Step 2: Check to see redis pods running 
+```
+kubectl get pods -l app=redis,role=master
+```
+
+![image](https://user-images.githubusercontent.com/11243960/139689797-dd971262-72c1-4f8c-b3d4-8db823785046.png)
+
+
+## Step3: Test the redis standalone
+
+-Edit the pod name in the below command to the one you got from previous command.
+- Replace XXXX with relevant characters. 
+
+Following command will open a shell into the pod and run the ```redis-cli``` tool. 
+
+```
+kubectl exec -it redis-master-XXXX redis-cli
+```
+
+-The ```kubectl exec``` command will start a secondary process in the specified container. 
+- Here we're asking for the redis-cli"
+
