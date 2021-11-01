@@ -270,3 +270,65 @@ Create guestbook deployment:
 ```
 kubectl create -f guestbook-deployment.yaml
 ```
+![image](https://user-images.githubusercontent.com/11243960/139664500-eaef7d4f-265c-4680-96af-a3700cbaa243.png)
+
+## Step 2: list the pod with label app=guestbook
+
+List all pods created with this deployment, by listing all pods that have a label ``app`` with a value ``guestbook``. This matches the labels defined in the above yaml file in the spec.template.metadata.labels section.
+
+```
+kubectl get pods -l app=guestbook
+```
+
+![image](https://user-images.githubusercontent.com/11243960/139665505-0e3daa6d-d4a6-4aba-98ea-8cc13d9fe7c6.png)
+
+
+## Step 3: Editing a deployment
+
+You can make modifications by using the following command:
+```
+kubectl edit deployment guestbook-v1
+```
+Tip: Above command will open up your default text editor, you can make changesand then save the file.
+
+This will retrieve the latest configuration for the Deployment from the Kubernetes server andthen load it into an editor for you. You'll notice that there are a lot more fields than in theoriginal yaml file we used. This is because the file contains all of the properties about thedeployment object that Kubernetes knows about, not just the ones we chose to specifywhen we create it. Also notice that it now contains the status section mentionedpreviously.You can also edit the original deployment file we used to create the Deployment to makechanges. You should use the following command to make the change effective when youedit the deployment locally.
+
+```
+kubectl apply -f guestbook-deployment.yaml
+```
+
+## Step 4: Create Service object to expose the deployment to external clients
+We will use the configuration file ```guestbook-service.yaml``` to create a Service resource named guestbook.
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: guestbook
+  labels:
+    app: guestbook
+spec:
+  ports:
+  - port: 3000
+    targetPort: http-server
+  selector:
+    app: guestbook
+  type: LoadBalancer
+```
+
+- A ```Service``` can be used to create a network path for incoming traffic to your running applicaiton. 
+- In this case, we are setting up a route from port 3000 on the cluster to the"http-server" port on our app, which is port 3000 per the Deployment container spec.
+
+## Step 5: create service
+Create guestbook service using the same type of commnad we used when we created the deployment. 
+
+```
+kubectl create -f guestbook-service.ymal
+```
+## Step 6: Connecting to app
+
+Test guestbook app in a browser of your choice using the url ```<your-public-ip>:<node-port>```.
+
+![image](https://user-images.githubusercontent.com/11243960/139668345-f7efb283-9a77-46bf-852a-47ef8df8a779.png)
+
+ 
