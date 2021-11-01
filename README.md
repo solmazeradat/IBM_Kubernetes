@@ -332,3 +332,13 @@ Test guestbook app in a browser of your choice using the url ```<your-public-ip>
 ![image](https://user-images.githubusercontent.com/11243960/139668345-f7efb283-9a77-46bf-852a-47ef8df8a779.png)
 
  
+# Exercise 4: Connect to a back-end Service
+
+The guestbook source code, under the guestbook/v1/guestbook directory, is written to support a variety of data stores. By default it will keep the log of guestbook entries in memory. That's ok for testingpurposes, but as you get into a more "real" environment where you scale your applicationthat model will not work because based on which instance of the application the user isrouted to they'll see very different results.
+
+To solve this we need to have all instances of our app share the same data store - in thiscase we're going to use a redis database that we deploy to our cluster. This instance ofredis will be defined in a similar manner to the guestbook as shown in the below file.
+
+redis-master-deployment.yaml
+```
+
+```
