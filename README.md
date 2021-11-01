@@ -399,5 +399,10 @@ kubectl exec -it redis-master-XXXX redis-cli
 ```
 
 -The ```kubectl exec``` command will start a secondary process in the specified container. 
-- Here we're asking for the redis-cli"
+- Here we're asking for the redis-cli" command to be executed in the container named "redis-master-q9zg7".
+- when this process ends the "kubectl exec" command will also exit but the other processes in the container will not be impacted.
+- Once in the container, we can use the redis-cli commannds to check if the redis database is running properly, or to configure it if needed. 
+- Enter the ```ping``` command, observe the reponse, then exit the container as showns below: 
+
+
 
