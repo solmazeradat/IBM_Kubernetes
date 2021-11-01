@@ -237,7 +237,7 @@ A configuation file for every object we create, must contain these four fields:
 
 guestbook-deployment.yaml
 ```
-piVersion: apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:  name: guestbook-v1
   labels:
