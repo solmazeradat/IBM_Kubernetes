@@ -404,5 +404,46 @@ kubectl exec -it redis-master-XXXX redis-cli
 - Once in the container, we can use the redis-cli commannds to check if the redis database is running properly, or to configure it if needed. 
 - Enter the ```ping``` command, observe the reponse, then exit the container as showns below: 
 
+![image](https://user-images.githubusercontent.com/11243960/139818910-b4ab4364-1cd3-4407-9d3d-0946d6b065bd.png)
 
+## Step 4: Expose ```redis-master``` deployment
+
+We need to expose the ```redis-master``` deployment as a service so that the guestbook application can connect to it through DNS lookup. Below is the service configuation file: 
+
+redis-master-services.yaml
+
+```
+apiVersion: v1
+kind: Service
+metadata:  name: redis-master
+  labels:
+    app: redis
+    role: master
+spec:
+  ports:
+  - port: 6379
+    targetPort: redis-server
+  selector:
+    app: redis
+```
+- The yaml file creates a ```service``` object called `redis-master` and configures it to target port 6379 on the pods selected by the selectors `app=redis` and `role=master`.
+
+## Step 5: create the service 
+
+```
+kubectl create -f redis-master-service.yaml
+```
+
+## Step 6: Restart Guestbook 
+
+Let's restart the guestbook application so that it will find the redis service to use the database.
+
+```
+kubectl delete deploy guestbook-v1
+kubectl create -f guestbook-deployment.yaml
+```
+
+## Step 7: testing application
+
+As previously, ue a borwser with the url: ```<your-public-ip><node-port>```.
 
