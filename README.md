@@ -445,5 +445,9 @@ kubectl create -f guestbook-deployment.yaml
 
 ## Step 7: testing application
 
-As previously, ue a borwser with the url: ```<your-public-ip><node-port>```.
+As previously, ue a borwser with the url: ```<your-public-ip><node-port>```. Use the following commands: 
 
+```
+kubectl get svc
+ibmcloud ks workers --cluster mycluster-free
+```
